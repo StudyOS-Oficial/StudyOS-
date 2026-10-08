@@ -1,0 +1,16 @@
+name = "studyos-pack-access"
+main = "index.js"
+compatibility_date = "2026-09-01"
+
+[vars]
+BASE_URL = "https://REEMPLAZAR.workers.dev"
+OFFER_ID = "STUDYOS_MENO"
+STUDYOS_URL = "https://studyos-oficial.github.io/studyos/"
+
+[[kv_namespaces]]
+binding = "ACCESS"
+id = "REEMPLAZAR_CON_ID_KV"
+
+[[r2_buckets]]
+binding = "DOCUMENTS"
+bucket_name = "studyos-private-docs"
