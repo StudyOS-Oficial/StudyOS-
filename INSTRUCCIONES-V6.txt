@@ -1,0 +1,30 @@
+STUDYOS V6 · LISTO PARA SUBIR A GITHUB PAGES
+
+1) Descomprime este ZIP y sube TODOS sus archivos DIRECTAMENTE a la raíz de
+   https://github.com/studyos-oficial/StudyOS- (no subas la carpeta contenedora).
+2) Reemplaza index.html, leer.html, lecturas.js, pagos.js y las imágenes existentes.
+3) Las 10 fotografías nuevas están optimizadas como .webp y deben subirse también.
+4) Los eBooks completos NO están incluidos. Solo aparece contenido gratuito.
+5) Los botones Comprar / StudyOS+ / Pack abren un nuevo modal elegante con 5 opciones.
+   Hoy aparece "Compra todavía no disponible" (es intencionado).
+6) Para conectar Stripe, crea CINCO Payment Links de PAGO ÚNICO y pega sus URLs
+   buy.stripe.com correspondientes en pagos.js (ebook1, ebook2, ebook3, plus, pack).
+7) NO cambies enabled ni deliveryReady a true hasta que hayas configurado y
+   probado la entrega privada para cada producto. Una URL de Checkout no
+   garantiza la entrega de los contenidos, y la página de gracias tampoco.
+8) Si se cambian los precios en Stripe, actualiza también la web y el modal.
+9) No uses para el pack el enlace antiguo de 5 € de otro producto.
+10) Hay que definir duración y condiciones de StudyOS+, revisar el material
+    editorial y garantizar cumplimiento legal/fiscal antes de activar ventas.
+
+TEST DE LA DEMO
+- Busca una receta por ingrediente y pulsa "Ver receta": aparecen imagen,
+  raciones, ingredientes completos y preparación paso a paso.
+- Pulsa "+ Planificar" y comprueba que se añade al planificador.
+- En Biblioteca pulsa "Comprar" en cualquier libro: aparece la comparativa
+  interactiva de los 5 productos; cambia entre ellos sin salir del modal.
+- Pulsa en el pack: debe aparecer 14,99 € y compra no disponible.
+- Al configurar todo (enabled/deliveryReady + URLs), aparece botón real
+  "Ir al pago seguro con Stripe" y abre el enlace adecuado.
+
+NUNCA SUBIR los PDFs completos a un repositorio público de GitHub.
