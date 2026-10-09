@@ -1,0 +1,13 @@
+STUDYOS 360 / WEB V4 / PUBLICACIÓN EN GITHUB PAGES
+
+1) Descomprime el ZIP público. Entra al repositorio studyos-oficial/StudyOS-.
+2) Sube TODOS los archivos SUELTOS al nivel raíz, sin carpetas, conservando nombres (incluidos leer.html, lecturas.js, pagos.js, cuaderno-14-dias.pdf e imágenes).
+3) Sustituye index.html. GitHub Pages: Settings > Pages > Deploy from a branch > main > /(root).
+4) Elimina del repositorio público los archivos antiguos muestra-1.pdf, muestra-2.pdf, muestra-3.pdf: ya NO forman parte de la nueva demo científica. Si tienes eBooks completos en el repositorio, retíralos del árbol público. GitHub conserva historial: si un documento sensible se publicó en un commit anterior, no basta con borrarlo de HEAD para retirarlo del historial.
+5) Comprueba la página, el enlace leer.html?libro=habitos, la ruta de 14 días, el buscador, el planificador y el cuaderno PDF.
+6) Stripe: NO actives los pagos hasta que existan enlaces correctos, términos de acceso de StudyOS+, eBooks revisados y entrega privada testada. pagos.js está intentionally desactivado. JAMÁS pongas claves secretas en GitHub.
+7) No subas el ZIP PRIVADO de manuscritos a GitHub. Los textos no han tenido revisión clínica externa y se deben considerar borradores.
+
+La ruta, el guardado de avance de lectura, el planificador y los favoritos usan almacenamiento local del navegador. No requieren crear cuenta; no se sincronizan entre dispositivos. No se guardan síntomas de salud personales en esta versión.
+
+La sección «Así sería tu espacio StudyOS» es una vista de concepto; no representa un área de usuarios ya desplegada.
