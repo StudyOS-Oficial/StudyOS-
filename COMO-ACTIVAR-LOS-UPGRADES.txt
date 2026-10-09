@@ -1,0 +1,31 @@
+STUDYOS V5 — UPGRADES Y ACCESO PREMIUM (PENDIENTE DE ACTIVACIÓN)
+
+¿QUÉ PUEDE LEER EL VISITANTE?
+- En leer.html cada eBook muestra SOLO la introducción y los capítulos 1, 2 y 3.
+- En el menú lateral se ven los nombres de los capítulos 4 a 13 y los anexos, sin su contenido.
+- Al tocar un capítulo cerrado, el lector llega a la invitación de continuar.
+- La muestra gratuita está físicamente separada de los PDF completos. No hay ninguna contraseña de JavaScript ni HTML oculto que permita descargarlos.
+
+¿QUÉ SE OFRECE DESPUÉS?
+- eBook individual: 5,99 € por cada uno de los tres.
+- StudyOS+ por separado: precio propuesto 7,99 €.
+- StudyOS Complete: 14,99 € (los tres eBooks + StudyOS+).
+- Hay que concretar la duración y alcance del acceso a StudyOS+ ANTES de cobrar.
+
+STRIPE (todavía sin activar)
+1. Crea cinco productos de pago único y cinco Stripe Payment Links en tu cuenta Stripe.
+2. Anota cada enlace y colócalo en el campo correspondiente de pagos.js: ebook1, ebook2, ebook3, plus, pack.
+3. NO actives enabled:true hasta terminar el sistema de entrega automática y el control de acceso.
+4. El sistema debe recibir una confirmación REAL en servidor de Stripe (webhook verificado), asociarla al producto comprado y dar un enlace temporal privado a los PDFs o habilitar el derecho de acceso.
+5. Nunca publiques los PDF completos, la clave secreta de Stripe ni tokens privados en GitHub Pages.
+6. Verifica el flujo de venta en modo de prueba: pago correcto, fallo de pago, envío del archivo correcto, enlace caducado y reembolso.
+7. Revisa obligaciones de comercio electrónico, impuestos, protección de datos y consumidor antes de lanzar.
+
+CUANDO ESTÉ LISTO
+- La versión pública de index.html ya tiene los botones y la comparativa Free / eBook / Complete.
+- La ficha del lector dirige al lector a #precios.
+- El archivo pagos.js sigue con enabled:false a propósito.
+- El ZIP privado contiene borradores de trabajo. Debe haber revisión científica/editorial externa antes de comercializar.
+
+PUBLICACIÓN EN GITHUB
+Descomprime el ZIP público y sube los archivos a la raíz de studyos-oficial/StudyOS- (sin carpetas). La demo no requiere backend para las funciones gratuitas. El progreso, favoritos y menú se guardan solo en el navegador.
