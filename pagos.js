@@ -1,9 +1,8 @@
-/* StudyOS V6 · Stripe Payment Links (pago único).
- * Estos enlaces son públicos; NUNCA publiques claves secretas de Stripe.
- * IMPORTANTE: las 4 URLs se han introducido sin cambiar sus precios en Stripe.
- * Verifica en tu panel que cobran los importes publicados en la web.
- * Habilita enabled y deliveryReady solo cuando la entrega privada esté
- * implementada y comprobada y las condiciones de StudyOS+ estén publicadas.
+/* StudyOS · Stripe Payment Links (pago único).
+ * Nunca publiques claves secretas en este repositorio.
+ * Los enlaces de eBooks y pack existen en Stripe Live; el de StudyOS+ aún no está configurado.
+ * Mantener enabled=false y deliveryReady=false hasta desplegar y probar el backend,
+ * verificar el dominio de correo, cargar los PDF en almacenamiento privado y publicar condiciones.
  */
 window.STUDYOS_PAYMENTS = {
   enabled: false,
