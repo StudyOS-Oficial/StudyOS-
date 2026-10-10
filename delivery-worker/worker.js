@@ -21,7 +21,7 @@ const token = () => { const b=new Uint8Array(32);crypto.getRandomValues(b);retur
 const sha = async s => {const b=await crypto.subtle.digest("SHA-256",enc.encode(s));return Array.from(new Uint8Array(b),x=>x.toString(16).padStart(2,"0")).join("");};
 const emailNorm = x => String(x||"").trim().toLowerCase();
 const emailValid = x => x.length<=254 && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(x);
-function cookie(req){const c=(req.headers.get("cookie")||"").split(";").map(x=>x.trim()).find(x=>x.startsWith("studyos_access="));return c?decodeURIComponent(c.slice(14)):"";}
+function cookie(req){const c=(req.headers.get("cookie")||"").split(";").map(x=>x.trim()).find(x=>x.startsWith("studyos_access="));return c?decodeURIComponent(c.slice(15)):"";}
 async function session(req,env){const t=cookie(req);return t?env.ACCESS.get("session:"+await sha(t)):null;}
 async function verifyStripe(raw,signature,secret){
  if(!signature||!secret)return false;
