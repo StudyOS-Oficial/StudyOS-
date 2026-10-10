@@ -5,6 +5,7 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport"/>
 <meta content="#f7f5f0" name="theme-color"/>
+<script>document.documentElement.classList.add("view-"+(["ebooks","recetas","precios"].includes(new URLSearchParams(location.search).get("vista"))?new URLSearchParams(location.search).get("vista"):"home"));</script>
 <meta content="StudyOS: guía gratuita de 14 días, lecturas de bienestar basadas en fuentes, 20 recetas y planificador semanal." name="description"/>
 <title>StudyOS — Tu bienestar, con conocimiento y herramientas</title>
 <style>
@@ -87,12 +88,26 @@
 @media(max-width:900px){.search-layout{grid-template-columns:minmax(0,1fr)!important;min-width:0!important}.search-layout>*{max-width:100%!important;min-width:0!important}.searchbox{width:100%;min-width:0!important}.searchbox input{min-width:0!important;width:100%}}
 @media(max-width:600px){.search-layout>a,.reader-banner .btn{max-width:100%!important;white-space:normal!important;text-align:center}.modal-card.upgrade-mode{max-height:calc(100dvh - 28px);scrollbar-width:thin}.upgrade-mode #modal-title{font-size:29px}.upgrade-mode .upgrade-bottom{padding-bottom:12px}}
 html,body{max-width:100%;overflow-x:clip}
+
+/* Mobile-first: the home page is a directory; navigation opens focused views. */
+.home-categories{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin:0 auto 28px;padding:0 28px;max-width:1220px}
+.home-category{background:#fffefa;border:1px solid #e0e8dc;border-radius:18px;padding:20px;box-shadow:0 7px 24px #243c2c0a}
+.home-category>span{font-size:10px;letter-spacing:1.4px;font-weight:800;color:#66826a}
+.home-category h2{font-size:clamp(23px,2.4vw,31px);letter-spacing:-.6px;line-height:1.15;margin:10px 0}
+.home-category p{font-size:13px;line-height:1.65;color:#69766b;min-height:64px}
+.home-category .btn{white-space:normal;text-align:center}
+html.view-home main>section:not(#inicio),html.view-home main>.assurances{display:none!important}
+html.view-ebooks main>* ,html.view-recetas main>*,html.view-precios main>*{display:none!important}
+html.view-ebooks main>#biblioteca,html.view-recetas main>#recetas,html.view-precios main>#precios{display:block!important}
+html.view-recetas main>#planificador,html.view-recetas main>.planner-section{display:block!important}
+html.view-ebooks .mobile-dock a[href*="vista=ebooks"],html.view-recetas .mobile-dock a[href*="vista=recetas"],html.view-precios .mobile-dock a[href*="vista=precios"],html.view-home .mobile-dock a[href="index.html"]{background:#e2ecdf;color:#294935}
+@media(max-width:760px){.home-categories{grid-template-columns:1fr;padding:0 16px;gap:12px;margin-top:8px}.home-category{padding:18px}.home-category p{min-height:0;margin-bottom:15px}.hero-editorial{padding-bottom:25px}.hero-editorial-inner{padding-bottom:24px}.hero-editorial-copy h1{font-size:clamp(39px,11vw,56px);letter-spacing:-1.8px}.home-category .btn{width:100%}.mobile-dock{z-index:50}}
 </style>
 </head>
 <body>
 <div class="head-band"><header class="wrap header">
 <a aria-label="StudyOS, inicio" class="brand" href="#inicio">studyos<i>.</i></a>
-<nav aria-label="Navegación principal" class="nav"><a href="#ruta">Mi ruta</a><a href="#biblioteca">Biblioteca</a><a href="#recetas">Buscador</a><a href="#planificador">Planificador</a><a href="#precios">Planes</a><a class="btn sm" href="#recetas">Explorar gratis ↗</a></nav>
+<nav aria-label="Navegación principal" class="nav"><a href="index.html?vista=ebooks">eBooks</a><a href="index.html?vista=recetas">Recetas</a><a href="index.html?vista=precios">Precios</a><a class="btn sm" href="index.html">Inicio ↗</a></nav>
 </header></div>
 <main>
 <section aria-labelledby="hero-title" class="hero-editorial" id="inicio">
@@ -105,7 +120,7 @@ html,body{max-width:100%;overflow-x:clip}
 <div aria-label="Recursos gratuitos disponibles" class="hero-editorial-counts"><div><b>20</b><span>recetas gratuitas</span></div><div><b>14</b><span>días de ruta flexible</span></div><div><b>3</b><span>lecturas abiertas</span></div></div>
 </div>
 </div>
-<div class="hero-credit">STUDYOS · SIN PRISAS, SIN PROMESAS MÁGICAS</div>
+<div class="home-categories wrap" aria-label="Explora StudyOS"><article class="home-category"><span>01 · BIBLIOTECA</span><h2>eBooks para leer a tu ritmo</h2><p>Lee capítulos gratuitos, consulta fuentes y ajusta el texto a tu móvil.</p><a class="btn sm" href="index.html?vista=ebooks">Explorar eBooks ↗</a></article><article class="home-category"><span>02 · COCINA</span><h2>Recetas fáciles de encontrar</h2><p>Busca por ingredientes, descubre ideas y organiza tus comidas.</p><a class="btn sm" href="index.html?vista=recetas">Ver recetas ↗</a></article><article class="home-category"><span>03 · PLANES</span><h2>Gratis o más profundidad</h2><p>Compara las opciones disponibles y lo que está en preparación.</p><a class="btn sm" href="index.html?vista=precios">Ver precios ↗</a></article></div><div class="hero-credit">STUDYOS · SIN PRISAS, SIN PROMESAS MÁGICAS</div>
 </section>
 <div class="assurances"><div class="wrap assurance-list"><span>♧ <b>Guías</b> para explorar antes de comprar</span><span>⌕ <b>Buscador de recetas</b> gratuito</span><span>▦ <b>Planificador</b> que puedes probar</span><span>♡ <b>A tu ritmo</b>, sin presiones</span></div></div>
 <section aria-labelledby="ruta-title" class="wrap section intro360" id="ruta">
@@ -186,7 +201,7 @@ html,body{max-width:100%;overflow-x:clip}
 <p class="tiny">No hay cuenta atrás ni promesas de resultados clínicos. Los pagos individuales y el pack se activarán solo cuando la entrega privada, las condiciones de acceso y la revisión editorial estén preparados.</p>
 </section>
 </main><footer class="footer"><div class="wrap"><span>© StudyOS · Comprender, elegir y cuidarse. · StudyOS v7 · beta</span><span>Información educativa, no diagnóstico, consejo médico personalizado ni garantía de resultados. Textos revisados para esta demo; originales en revisión.</span></div></footer>
-<nav aria-label="Accesos rápidos en móvil" class="mobile-dock"><a href="#ruta"><span>✦</span>Mi ruta</a><a href="#biblioteca"><span>▤</span>Leer</a><a href="#recetas"><span>⌕</span>Recetas</a><a href="#planificador"><span>▦</span>Semana</a></nav>
+<nav aria-label="Accesos rápidos en móvil" class="mobile-dock"><a href="index.html"><span>⌂</span>Inicio</a><a href="index.html?vista=ebooks"><span>▤</span>eBooks</a><a href="index.html?vista=recetas"><span>⌕</span>Recetas</a><a href="index.html?vista=precios"><span>€</span>Precios</a></nav>
 <div aria-hidden="true" aria-labelledby="modal-title" aria-modal="true" class="modal" id="modal" role="dialog"><div class="modal-card" id="modal-card"><button aria-label="Cerrar ventana" class="modal-close" id="modal-close" type="button">×</button><div class="eyebrow" id="modal-label"></div><h3 id="modal-title"></h3><div id="modal-content"></div><div class="modal-actions" id="modal-actions"></div></div></div>
 <div aria-live="polite" class="toast" id="toast" role="status"></div>
 <script src="pagos.js?v=20261009-precios1299"></script>
