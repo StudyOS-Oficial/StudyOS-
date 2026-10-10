@@ -16,6 +16,31 @@
 .left-text .prose p,.left-text .prose li{text-align:left;hyphens:none}
 @media(max-width:800px){.shell{padding:12px 12px 90px;gap:13px}.reader-intro{margin:3px 0 16px}.reader-intro p{font-size:14px;line-height:1.65}.reader-intro h1{font-size:clamp(34px,9vw,42px);letter-spacing:-1px;line-height:1.1}.book-top{gap:10px}.side img{width:48px;height:66px}.side h2{font-size:20px}.side p{font-size:12px}.side-divider{margin:10px 0 4px}.book-toc{gap:7px;margin:0 -2px 3px}.book-toc button{max-width:210px;padding:9px 12px;font-size:12px;white-space:normal}.paper{padding:20px 17px;border-radius:14px;box-shadow:0 5px 22px #345c350a}.reading-meta{font-size:11px;align-items:flex-start}.meter{margin:11px 0 22px}.prose{font-size:var(--reader-font);line-height:1.85;letter-spacing:.005em}.prose h2{font-size:1.45em;line-height:1.22;margin:12px 0 18px}.prose h3{font-size:1.18em;line-height:1.3;margin:22px 0 10px}.prose p,.prose li{margin-bottom:1.12em}.prose ul,.prose ol{padding-left:22px}.prose blockquote{margin:18px 0;padding:13px 14px}.chapter-actions{margin-top:24px;padding-top:17px}.nav-chapter{display:grid;grid-template-columns:1fr 1fr;gap:9px}.nav-chapter .btn{min-height:46px;padding:11px 10px;font-size:12px}.sources{margin-top:22px;padding-top:20px}.top{padding:8px 11px;gap:8px;align-items:center}.logo{font-size:22px;flex:0 0 auto}.controls{gap:5px;flex-wrap:nowrap}.tool{padding:8px 9px;font-size:12px;min-height:38px}.back{display:none}.upgrade{padding:18px;margin-top:18px}.upgrade h2{font-size:27px}.upgrade .offer-buttons .btn{width:100%}}
 @media(max-width:380px){.paper{padding:18px 14px}.tool{padding:7px;font-size:11px}.nav-chapter{grid-template-columns:1fr}.reading-meta{gap:7px}}
+
+/* iOS reader fix: prevent text autosizing and force all reading content inside viewport. */
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%;width:100%;overflow-x:hidden}
+body{width:100%;max-width:100%;overflow-x:hidden}
+.shell,.main-col,.paper,.prose{min-width:0;max-width:100%}
+.paper{width:100%;overflow-wrap:anywhere}
+.prose{width:100%;max-width:100%;font-size:var(--reader-font);line-height:1.78;overflow-wrap:anywhere;word-break:normal}
+.prose p,.prose li{font-size:1em;max-width:100%;white-space:normal;overflow-wrap:anywhere;word-break:normal}
+.prose img,.prose table,.prose pre{max-width:100%}
+@media(max-width:800px){
+ .shell{width:100%;padding:12px 12px 90px;grid-template-columns:minmax(0,1fr)}
+ .main-col{width:100%;min-width:0}
+ .paper{padding:18px 16px;border-radius:14px}
+ .prose{font-size:18px;line-height:1.78;letter-spacing:0}
+ .prose h2{font-size:1.35em;line-height:1.25;overflow-wrap:anywhere}
+ .prose h3{font-size:1.15em;line-height:1.3;overflow-wrap:anywhere}
+ .prose p,.prose li{text-align:left;hyphens:none;-webkit-hyphens:none}
+ .controls{min-width:0}
+ .top{min-width:0}
+}
+@media(max-width:390px){
+ .paper{padding:16px 13px}
+ .prose{font-size:17px;line-height:1.76}
+ .tool{font-size:11px;padding:7px}
+}
 </style></head><body>
 <header><div class="top"><a class="logo" href="index.html" aria-label="Volver a StudyOS">studyos<b>.</b></a><div class="controls"><a class="back" href="index.html?vista=ebooks">← Biblioteca</a><button class="tool" id="smaller" aria-label="Reducir tamaño de texto">A−</button><button class="tool" id="larger" aria-label="Aumentar tamaño de texto">A+</button><button class="tool" id="justify" aria-pressed="false" title="Alternar texto justificado y alineado a la izquierda">☷ Alinear</button><button class="tool" id="night" aria-label="Alternar modo nocturno">◐</button></div></div></header>
 <main class="shell"><aside class="side"><div class="book-top"><img id="cover" alt="Portada de la guía"><div><div class="eyebrow">LECTURA GRATIS · VISTA PREVIA</div><h2 id="side-title"></h2><p id="side-sub"></p></div></div><div class="side-divider"></div><div class="eyebrow" id="toc-counter"></div><nav class="book-toc" id="toc" aria-label="Índice de capítulos"></nav></aside>
