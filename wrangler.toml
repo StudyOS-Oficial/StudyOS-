@@ -3,9 +3,9 @@ main = "index.js"
 compatibility_date = "2026-09-01"
 
 [vars]
-BASE_URL = "https://REEMPLAZAR.workers.dev"
+BASE_URL = "https://REEMPLAZAR-CON-TU-WORKER.workers.dev"
 OFFER_ID = "STUDYOS_MENO"
-STUDYOS_URL = "https://studyos-oficial.github.io/studyos/"
+STUDYOS_URL = "https://studyos-oficial.github.io/StudyOS-/"
 
 [[kv_namespaces]]
 binding = "ACCESS"
