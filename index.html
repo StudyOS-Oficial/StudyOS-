@@ -179,6 +179,31 @@ html.view-ebooks .mobile-dock a[href*="vista=ebooks"],html.view-recetas .mobile-
   .recipe-picture{height:165px}
   .book-actions .textlink{font-size:11px}
 }
+
+/* Review fixes: keep compact grids usable on narrow phones and avoid overflow. */
+@media(max-width:390px){
+  .recipes{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .recipe-picture{height:105px}
+  .recipe-body{padding:9px}
+  .recipe-body h3{font-size:15px;overflow-wrap:anywhere}
+  .recipe-body p{overflow-wrap:anywhere}
+  .recipe-foot{align-items:flex-start}
+  .recipe-foot .chip{font-size:9px;padding:4px 6px}
+  .recipe-buttons{flex-direction:column}
+  .recipe-buttons .btn{width:100%;font-size:11px}
+  .books{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .book-scene{height:125px}
+  .book-scene img{max-height:108px}
+  .book-text{padding:10px}
+  .book h3{font-size:17px;overflow-wrap:anywhere}
+  .book-actions{flex-direction:column}
+  .book-actions .btn{width:100%}
+}
+@media(max-width:350px){
+  .recipes,.books{grid-template-columns:1fr}
+  .recipe-picture{height:150px}
+  .book-scene{height:165px}
+}
 </style>
 </head>
 <body>
@@ -230,7 +255,7 @@ html.view-ebooks .mobile-dock a[href*="vista=ebooks"],html.view-recetas .mobile-
 <div aria-label="Filtros del buscador" class="filter-list" id="filters"><button aria-pressed="true" class="filter active" data-filter="todos" type="button">Todas</button><button aria-pressed="false" class="filter" data-filter="desayuno" type="button">Desayunos</button><button aria-pressed="false" class="filter" data-filter="comida" type="button">Comidas</button><button aria-pressed="false" class="filter" data-filter="cena" type="button">Cenas</button><button aria-pressed="false" class="filter" data-filter="rápida" type="button">Rápidas</button><button aria-pressed="false" class="filter" data-filter="vegetariana" type="button">Vegetarianas</button><button aria-pressed="false" class="filter" data-filter="proteína" type="button">Con proteína</button><button aria-pressed="false" class="filter" data-filter="favoritas" type="button">♡ Favoritas</button></div>
 <div class="resultbar"><span aria-live="polite" id="result-count"></span><button id="clearfilters" type="button">Limpiar filtros</button></div>
 <div class="recipes" id="results"></div><div class="more-recipes-wrap" id="more-recipes-wrap"><button class="btn secondary" id="more-recipes" type="button">Ver las 20 recetas gratuitas ↓</button><p class="tiny">20 ideas reales y un planificador de 7 días para probar sin pagar.</p></div>
-<div class="upbar"><div><b>¿Te gustaría tener más opciones cada día?</b><p>Disfruta de 20 recetas gratis. StudyOS+ incluye el recetario ampliado, su buscador y más herramientas de planificación.</p></div><a class="btn sm" href="#precios">Conocer StudyOS+ ↗</a></div><p class="tiny">20 recetas completas y gratuitas. Las imágenes son ilustrativas de los platos; la selección no incluye el recetario premium completo de StudyOS+.</p>
+<div class="upbar"><div><b>¿Te gustaría tener más opciones cada día?</b><p>Disfruta de 20 recetas gratis. StudyOS+ incluye el recetario ampliado, su buscador y más herramientas de planificación.</p></div><a class="btn sm" href="index.html?vista=precios">Conocer StudyOS+ ↗</a></div><p class="tiny">20 recetas completas y gratuitas. Las imágenes son ilustrativas de los platos; la selección no incluye el recetario premium completo de StudyOS+.</p>
 </div></section>
 <section class="wrap section planner-section" id="planificador"><div class="section-heading"><div><div class="eyebrow">04 / ORGANIZA TUS COMIDAS</div><h2>Planificador semanal.</h2><p class="lead">Genera una semana con la selección gratuita, cambia cualquier plato y prepara tu lista de ingredientes. Tu plan se guarda en este navegador.</p></div><span class="pill-note">Prueba funcional · 7 días</span></div>
 <div class="planner-panel"><div class="planner-top"><div><b style="font-size:16px">Tu menú de la semana</b><div class="mini-note">Desayuno · Comida · Cena · 7 días</div></div><div class="planner-actions"><button class="btn sm" id="generate-week" type="button">✳ Generar semana</button><button class="btn secondary sm" id="reset-week" type="button">Vaciar</button></div></div>
@@ -260,7 +285,7 @@ html.view-ebooks .mobile-dock a[href*="vista=ebooks"],html.view-recetas .mobile-
 <p class="lead" style="margin-bottom:30px">Tres formas de utilizar StudyOS. Lo que está disponible hoy aparece como «Gratis». La compra de las nuevas ediciones permanece desactivada mientras terminamos la revisión y la entrega privada.</p>
 <div aria-label="Así funciona StudyOS" class="upgrade-steps"><div><span>01</span><strong>Prueba</strong><small>Lee capítulos, busca recetas y planifica tu semana.</small></div><div><span>02</span><strong>Elige</strong><small>Un eBook, StudyOS+ o el pack entero.</small></div><div><span>03</span><strong>Accede</strong><small>Tras el pago, entrega privada y acceso según condiciones definitivas.</small></div></div>
 <div class="pricing pricing-v5-grid">
-<article class="price-card"><span class="tag">DISPONIBLE AHORA</span><h3>StudyOS Free</h3><div class="price-big">0 €</div><p>Todo lo que necesitas para probar cómo se siente StudyOS antes de decidir.</p><ul><li>Capítulos gratuitos de las 3 guías</li><li>20 recetas con ingredientes y pasos</li><li>Buscador, favoritos y planificador</li><li>Ruta y cuaderno de 14 días</li></ul><a class="btn secondary" href="#ruta">Empezar gratis ↗</a><div class="price-mini">Sin tarjeta ni cuenta.</div></article>
+<article class="price-card"><span class="tag">DISPONIBLE AHORA</span><h3>StudyOS Free</h3><div class="price-big">0 €</div><p>Todo lo que necesitas para probar cómo se siente StudyOS antes de decidir.</p><ul><li>Capítulos gratuitos de las 3 guías</li><li>20 recetas con ingredientes y pasos</li><li>Buscador, favoritos y planificador</li><li>Ruta y cuaderno de 14 días</li></ul><a class="btn secondary" href="index.html?vista=ebooks">Empezar gratis ↗</a><div class="price-mini">Sin tarjeta ni cuenta.</div></article>
 <article class="price-card"><span class="tag">PARA IR A TU RITMO</span><h3>Por separado</h3><div class="price-big">2,99 € <span class="period">/ eBook</span></div><p>Profundiza únicamente en el tema que te interesa.</p><ul><li>Una guía digital ampliada, cuando esté validada</li><li>Lectura completa y ejercicios de aplicación</li><li>Fuentes y referencias consultables</li><li>StudyOS+ individual: 7,99 € (enlace pendiente)</li></ul><button class="btn secondary" data-buy="ebook1" type="button">Explorar los eBooks ↗</button><button class="btn secondary sm" data-buy="plus" title="Ver qué incluye y cómo funcionará la compra segura" type="button">Conocer StudyOS+ ↗</button><div class="price-mini">Pago único previsto. Venta aún no activada.</div></article>
 <article class="price-card highlight"><span class="tag" style="color:#d4e8d1">TODOS LOS RECURSOS</span><h3>StudyOS Complete</h3><div class="price-big">12,99 €</div><p>Los tres eBooks y StudyOS+ juntos. <strong>Ahorras 3,97 €</strong> frente a los 16,96 € por separado.</p><ul><li>3 guías completas revisadas</li><li>Acceso a StudyOS+ con recetario ampliado</li><li>Buscador avanzado y planificador</li><li>Biblioteca de recursos y fuentes</li></ul><button class="btn" data-buy="pack" title="Ver qué incluye y cómo funcionará la compra segura" type="button">Quiero el pack completo ↗</button><div class="price-mini" style="color:#dfecdc">Pago único propuesto. Condiciones y duración de acceso pendientes de definir. Aún no disponible.</div></article>
 </div><div aria-label="Comparativa de acceso" class="compare-wrap">
