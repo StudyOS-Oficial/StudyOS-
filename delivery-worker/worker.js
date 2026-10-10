@@ -5,6 +5,7 @@ const PRODUCTS = {
   ebook3: { title: "Ayuno OS", pdf: "ebooks/ebook-3.pdf", html: "ebooks/ebook-3.html" }
 };
 const PACK = ["ebook1", "ebook2", "ebook3"];
+const PAYMENT_LINKS = { ebook1: "plink_1UOgH9PdiAyvfYF71bWghV11", ebook2: "plink_1UOgIdPdiAyvfYF76vWvCHci", ebook3: "plink_1UOgJbPdiAyvfYF7Z5A1PBpq", pack: "plink_1UOgLIPdiAyvfYF77WRmmODa" };
 const COMMON = {
   "cache-control": "no-store, private",
   "x-content-type-options": "nosniff",
@@ -33,11 +34,13 @@ async function verifyStripe(raw,signature,secret){
  return sigs.some(x=>x.length===expected.length&&x===expected);
 }
 function mappedOffer(link,env){
- if(link&&link===env.STRIPE_LINK_EBOOK1)return "ebook1";
- if(link&&link===env.STRIPE_LINK_EBOOK2)return "ebook2";
- if(link&&link===env.STRIPE_LINK_EBOOK3)return "ebook3";
- if(link&&link===env.STRIPE_LINK_PACK)return "pack";
- return null;
+ const map = {
+  [env.STRIPE_LINK_EBOOK1 || PAYMENT_LINKS.ebook1]:"ebook1",
+  [env.STRIPE_LINK_EBOOK2 || PAYMENT_LINKS.ebook2]:"ebook2",
+  [env.STRIPE_LINK_EBOOK3 || PAYMENT_LINKS.ebook3]:"ebook3",
+  [env.STRIPE_LINK_PACK || PAYMENT_LINKS.pack]:"pack"
+ };
+ return map[link] || null;
 }
 async function sendMagic(env,address){
  if(!env.RESEND_API_KEY||!env.MAIL_FROM||!env.BASE_URL)throw new Error("Email delivery not configured");
