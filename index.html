@@ -102,6 +102,83 @@ html.view-ebooks main>#biblioteca,html.view-recetas main>#recetas,html.view-prec
 html.view-recetas main>#planificador,html.view-recetas main>.planner-section{display:block!important}
 html.view-ebooks .mobile-dock a[href*="vista=ebooks"],html.view-recetas .mobile-dock a[href*="vista=recetas"],html.view-precios .mobile-dock a[href*="vista=precios"],html.view-home .mobile-dock a[href="index.html"]{background:#e2ecdf;color:#294935}
 @media(max-width:760px){.home-categories{grid-template-columns:1fr;padding:0 16px;gap:12px;margin-top:8px}.home-category{padding:18px}.home-category p{min-height:0;margin-bottom:15px}.hero-editorial{padding-bottom:25px}.hero-editorial-inner{padding-bottom:24px}.hero-editorial-copy h1{font-size:clamp(39px,11vw,56px);letter-spacing:-1.8px}.home-category .btn{width:100%}.mobile-dock{z-index:50}}
+
+/* Compact mobile layout: reduce oversized cards and improve information density. */
+@media(max-width:600px){
+  .wrap{padding-left:18px;padding-right:18px}
+  .section{padding-top:38px;padding-bottom:42px}
+  h2{font-size:clamp(27px,7vw,35px);letter-spacing:-.7px}
+  .hero-editorial{min-height:0}
+  .hero-editorial-inner{padding-top:38px;padding-bottom:24px}
+  .hero-editorial-copy h1{font-size:clamp(38px,10vw,49px);line-height:1.04;margin:13px 0 16px}
+  .hero-editorial-copy>p{font-size:15px;line-height:1.6}
+  .hero-editorial-counts{margin-top:18px;gap:12px}
+  .home-categories{gap:9px;padding:0 16px;margin-bottom:18px}
+  .home-category{padding:14px 15px;border-radius:15px}
+  .home-category>span{font-size:9px}
+  .home-category h2{font-size:23px;line-height:1.12;margin:7px 0}
+  .home-category p{font-size:12px;line-height:1.5;margin:0 0 11px}
+  .home-category .btn{padding:10px 13px;font-size:12px;min-height:40px}
+  .section-heading{align-items:flex-start;margin-bottom:19px;gap:10px}
+  .section-heading h2{font-size:30px;margin:8px 0}
+  .section-heading .lead,.lead{font-size:13px;line-height:1.6}
+  .books{grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}
+  .book{border-radius:14px}
+  .book-scene{height:145px;padding:12px}
+  .book-scene img{max-height:125px;max-width:85%}
+  .book-text{padding:13px}
+  .book h3{font-size:20px;line-height:1.12;margin:7px 0}
+  .book p{font-size:11px;line-height:1.5;min-height:0}
+  .preview-badge{font-size:10px;line-height:1.4}
+  .book-actions{gap:7px;margin-top:12px}
+  .book-actions .btn{font-size:11px;padding:8px 10px}
+  .book-price{font-size:15px}
+  .search-layout{gap:12px;margin-top:18px}
+  .searchbox{padding:6px 7px 6px 12px;border-radius:14px}
+  .searchbox input{font-size:13px;padding:8px 0}
+  .filter-list{gap:6px;margin:12px 0 16px}
+  .filter{font-size:11px;padding:7px 10px}
+  .recipes{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+  .recipe{border-radius:14px}
+  .recipe-picture{height:125px}
+  .fav{width:30px;height:30px;top:7px;right:7px;font-size:18px}
+  .recipe-body{padding:12px}
+  .recipe-body h3{font-size:17px;line-height:1.15;min-height:0;margin-bottom:7px}
+  .recipe-body p{font-size:11px;line-height:1.4;min-height:0}
+  .recipe-foot{gap:5px;font-size:10px;margin-top:10px}
+  .recipe-foot .chip{padding:4px 7px}
+  .recipe-buttons{gap:6px;margin-top:11px}
+  .recipe-buttons .btn{font-size:11px;padding:8px 6px;min-width:0;white-space:normal}
+  .upbar{padding:14px;border-radius:13px;margin-top:17px;gap:12px}
+  .planner-panel{padding:13px;border-radius:15px}
+  .planner-top{margin-bottom:12px}
+  .pricing{gap:12px}
+  .pricing-v5-grid{grid-template-columns:1fr}
+  .price-card{padding:21px;border-radius:17px}
+  .price-card h3{font-size:27px;margin:9px 0}
+  .price-big{font-size:36px;letter-spacing:-1px}
+  .price-card p{font-size:13px;line-height:1.55;margin:9px 0}
+  .price-card ul{font-size:12px;line-height:1.7;min-height:0;margin:13px 0 18px}
+  .price-card>.btn{padding:12px 15px}
+  .upgrade-steps{grid-template-columns:1fr;gap:8px;margin-bottom:18px}
+  .upgrade-steps>div{display:grid;grid-template-columns:28px 1fr;column-gap:9px;align-items:start;padding:12px 13px;border-radius:13px}
+  .upgrade-steps>div>span{grid-row:span 2;font-size:17px}
+  .upgrade-steps strong{font-size:14px}
+  .upgrade-steps small{font-size:11px;line-height:1.45;margin-top:3px}
+  .pricing-v5>.lead{margin-bottom:18px!important}
+  .footer{padding:22px 0 25px}
+  .footer .wrap{font-size:10px;line-height:1.5;gap:8px}
+  .mobile-dock{padding-top:6px;padding-bottom:calc(7px + env(safe-area-inset-bottom))}
+  .mobile-dock a{font-size:10px;gap:2px}
+  .mobile-dock a span{font-size:18px}
+}
+@media(max-width:390px){
+  .books,.recipes{grid-template-columns:1fr}
+  .book-scene{height:175px}
+  .book-scene img{max-height:150px}
+  .recipe-picture{height:165px}
+  .book-actions .textlink{font-size:11px}
+}
 </style>
 </head>
 <body>
