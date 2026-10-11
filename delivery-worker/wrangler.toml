@@ -2,11 +2,8 @@ name = "studyos-private-delivery"
 main = "worker.js"
 compatibility_date = "2026-10-01"
 
-# No keys or production IDs in version control. Keep payments disabled until testing passes.
 [vars]
 PAYMENTS_ENABLED = "false"
-BASE_URL = "https://REPLACE-WITH-YOUR-WORKER.workers.dev"
-MAIL_FROM = "StudyOS <delivery@YOUR-VERIFIED-DOMAIN>"
 STRIPE_LINK_EBOOK1 = "plink_1UOgH9PdiAyvfYF71bWghV11"
 STRIPE_LINK_EBOOK2 = "plink_1UOgIdPdiAyvfYF76vWvCHci"
 STRIPE_LINK_EBOOK3 = "plink_1UOgJbPdiAyvfYF7Z5A1PBpq"
@@ -14,10 +11,8 @@ STRIPE_LINK_PACK = "plink_1UOgLIPdiAyvfYF77WRmmODa"
 
 [[kv_namespaces]]
 binding = "ACCESS"
-id = "REPLACE_WITH_CLOUDFLARE_KV_NAMESPACE_ID"
+id = "REPLACE_WITH-CLOUDFLARE-KV-ID"
 
 [[r2_buckets]]
 binding = "DOCUMENTS"
 bucket_name = "studyos-private-docs"
-
-# delivery flow: success redirect is configured only after testing
