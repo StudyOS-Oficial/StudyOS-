@@ -2,6 +2,7 @@ name = "studyos-private-delivery"
 main = "worker.js"
 compatibility_date = "2026-10-01"
 
+# Production stays disabled until the test flow is accepted.
 [vars]
 PAYMENTS_ENABLED = "false"
 STRIPE_LINK_EBOOK1 = "plink_1UOgH9PdiAyvfYF71bWghV11"
@@ -11,8 +12,27 @@ STRIPE_LINK_PACK = "plink_1UOgLIPdiAyvfYF77WRmmODa"
 
 [[kv_namespaces]]
 binding = "ACCESS"
-id = "REPLACE_WITH-CLOUDFLARE-KV-ID"
+id = "53602f9db3354785843ad8813145fadf"
 
 [[r2_buckets]]
+binding = "DOCUMENTS"
+bucket_name = "studyos-private-docs"
+
+# Isolated Stripe test-mode deployment. Store only test-mode secrets with --env test.
+[env.test]
+name = "studyos-private-delivery-test"
+
+[env.test.vars]
+PAYMENTS_ENABLED = "true"
+STRIPE_LINK_EBOOK1 = "plink_1UPJTlPdiAyvfYF7RHcu70x1"
+STRIPE_LINK_EBOOK2 = "plink_1UPJVMPdiAyvfYF7xHX4cYI2"
+STRIPE_LINK_EBOOK3 = "plink_1UPJVnPdiAyvfYF732G52HU7"
+STRIPE_LINK_PACK = "plink_1UPJWCPdiAyvfYF7NqFAtQ34"
+
+[[env.test.kv_namespaces]]
+binding = "ACCESS"
+id = "075ad5e4cd9b49108e2b6ec06c1c3dd6"
+
+[[env.test.r2_buckets]]
 binding = "DOCUMENTS"
 bucket_name = "studyos-private-docs"
