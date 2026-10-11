@@ -1,53 +1,46 @@
-# StudyOS — entrega privada d'eBooks V2
+# StudyOS — private eBook delivery V2
 
-## Estat
-- Worker en branca de proves; no desplegat ni validat en producció.
-- `PAYMENTS_ENABLED=false`.
-- No activar vendes reals fins que el flux complet passi les proves.
+## Status
+- The PR remains a draft and has not been merged.
+- Production remains disabled with `PAYMENTS_ENABLED=false`.
+- A separate Stripe test environment is configured in `wrangler.toml`; it uses only sandbox Payment Links and a separate test KV namespace.
+- The test Worker has not been deployed yet.
 
-## Flux actual
-1. Stripe Payment Link obre Checkout.
-2. Després d'un pagament confirmat, Stripe redirigeix a `/thanks?session_id={CHECKOUT_SESSION_ID}`.
-3. El Worker consulta la Checkout Session directament a Stripe i comprova que `payment_status=paid`.
-4. El Worker comprova que el Payment Link és un dels quatre productes autoritzats.
-5. Es crea l'entitlement de compra a KV i una sessió privada HttpOnly de 14 dies.
-6. El comprador veu una pàgina de compra confirmada amb els PDFs disponibles.
-7. Els PDFs i HTML es serveixen només després de validar la sessió i l'entitlement.
-8. El webhook Stripe manté la conciliació automàtica i repeteix el mateix procés de concessió de manera idempotent.
+## Flow
+1. Stripe Payment Links open Checkout.
+2. After a confirmed sandbox payment, Stripe redirects to `/thanks?session_id={CHECKOUT_SESSION_ID}`.
+3. The Worker retrieves the Checkout Session from Stripe and verifies `payment_status=paid`.
+4. The Worker checks that the Payment Link is one of the four allowed products.
+5. A purchase entitlement is stored in KV and a private HttpOnly session is issued for 14 days.
+6. The buyer receives private PDF downloads and responsive HTML readers from R2.
+7. The webhook reconciles successful checkouts and revocations.
 
-Aquesta V2 no depèn de Resend ni de correu electrònic.
+This V2 does not depend on Resend or email.
 
-## Recursos
-- GitHub Pages: web pública i mostres.
-- Cloudflare Worker: verificació Stripe i entrega privada.
-- Cloudflare KV: compres i sessions temporals.
-- Cloudflare R2: PDFs/HTML complets privats.
-- Stripe Payment Links: cobrament per transacció.
+## Cloudflare resources
+- Production KV: `studyos-access`.
+- Test KV: `studyos-access-test`.
+- R2 bucket: `studyos-private-docs`; Public Access is disabled.
+- The six private objects are uploaded under `ebooks/ebook-1.pdf`, `ebooks/ebook-1.html`, `ebooks/ebook-2.pdf`, `ebooks/ebook-2.html`, `ebooks/ebook-3.pdf`, and `ebooks/ebook-3.html`.
+- The supplied HTML files were the public home/library/workbook pages, not three product readers. The private HTML readers were generated from the complete PDF text and retain a download link to each original PDF. Images and original page layout remain in the PDF.
 
-## Configuració pendent
-1. Posar a `wrangler.toml` l'ID real del namespace KV `studyos-access`.
-2. Confirmar que el bucket R2 privat és `studyos-private-docs` i sense public access.
-3. Preparar i pujar els sis fitxers finals:
-   - `ebooks/ebook-1.pdf` i `ebooks/ebook-1.html`
-   - `ebooks/ebook-2.pdf` i `ebooks/ebook-2.html`
-   - `ebooks/ebook-3.pdf` i `ebooks/ebook-3.html`
-4. Configurar fora de Git els secrets necessaris del Worker: clau secreta de Stripe i secret de signatura del webhook.
-5. Configurar el webhook Stripe a `/stripe-webhook` per `checkout.session.completed` i `checkout.session.async_payment_succeeded`.
-6. Configurar el redirect de cada Payment Link cap a l'URL del Worker amb `{CHECKOUT_SESSION_ID}`. Fer-ho només quan el Worker estigui desplegat i provat.
-7. Mantenir `PAYMENTS_ENABLED=false` durant totes les proves.
-8. Provar salut, pagament confirmat, pagament no confirmat, Payment Link no autoritzat, duplicats del webhook, sessió caducada, accés a un eBook no comprat i fitxer absent.
-9. Provar cada producte individual i el pack.
-10. Afegir i provar revocació per reemborsament/disputa abans de vendre en real.
-11. Revisar obligacions legals i fiscals de venda digital a Espanya/UE.
-12. Només quan tot passi, activar el flux real i els botons públics.
+## Test setup still required
+1. Deploy only the `test` Worker environment as `studyos-private-delivery-test`.
+2. Add the Stripe **test-mode** secret key as `STRIPE_SECRET_KEY` and the new sandbox webhook signing secret as `STRIPE_WEBHOOK_SECRET` to that test Worker. Never commit secrets.
+3. Create a test-mode webhook endpoint at `/stripe-webhook` for `checkout.session.completed` and `checkout.session.async_payment_succeeded`; add refund/dispute events for revocation tests.
+4. Set the four Stripe sandbox Payment Links to redirect to the deployed test Worker URL with `{CHECKOUT_SESSION_ID}`.
+5. Keep production `PAYMENTS_ENABLED=false` throughout testing.
+6. Test health, confirmed and unconfirmed checkout, invalid Payment Link, duplicate webhook, expired session, unpurchased ebook access, missing object, each individual product, the pack, and refund/dispute revocation.
 
-## Seguretat
-- Els eBooks complets no van al repositori públic.
-- R2 no ha de tenir accés públic.
-- Els PDFs requereixen sessió HttpOnly i entitlement.
-- La signatura del webhook es verifica abans de processar-lo.
-- La Checkout Session es valida servidor-side amb Stripe; no es confia en el preu ni en el producte enviats pel navegador.
-- No es guarden claus secretes al repositori.
+The test environment variable `PAYMENTS_ENABLED=true` is isolated from production and uses only the sandbox Payment Links. Production remains `false`.
 
-## Proves
-Quan tinguem l'ID real del KV, els fitxers finals i les secrets configurades, es pot desplegar una versió de prova amb els pagaments desactivats i executar una bateria end-to-end. No s'ha de fer cap venda real abans d'aquesta validació.
+## Security
+- Full eBooks are not in the public repository.
+- R2 has no public access; Worker routes require a valid purchase session.
+- Stripe signatures are verified before webhook processing.
+- Checkout Sessions are verified server-side; browser-supplied price/product values are not trusted.
+- Secrets stay outside Git.
+- Do not merge this PR or enable live payments until sandbox end-to-end and revocation checks pass.
+
+## Production activation
+Only after all testing passes: verify production Payment Link IDs, set production Worker secrets, configure live webhook/redirects, and review applicable Spanish/EU digital-sales tax/legal requirements. Activate production payments only after the user explicitly approves that final step.
