@@ -13,7 +13,7 @@ STUDYOS V6 · LISTO PARA SUBIR A GITHUB PAGES
    probado la entrega privada para cada producto. Una URL de Checkout no
    garantiza la entrega de los contenidos, y la página de gracias tampoco.
 8) Si se cambian los precios en Stripe, actualiza también la web y el modal.
-9) No uses para el pack el enlace antiguo de 5 € de otro producto.
+9) No uses enlaces antiguos de Stripe de otros productos para el pack. El precio objetivo de Complete es 9,99 €.
 10) Hay que definir duración y condiciones de StudyOS+, revisar el material
     editorial y garantizar cumplimiento legal/fiscal antes de activar ventas.
 
@@ -23,7 +23,7 @@ TEST DE LA DEMO
 - Pulsa "+ Planificar" y comprueba que se añade al planificador.
 - En Biblioteca pulsa "Comprar" en cualquier libro: aparece la comparativa
   interactiva de los 5 productos; cambia entre ellos sin salir del modal.
-- Pulsa en el pack: debe aparecer 14,99 € y compra no disponible.
+- Pulsa en el pack: debe aparecer 9,99 € y compra no disponible.
 - Al configurar todo (enabled/deliveryReady + URLs), aparece botón real
   "Ir al pago seguro con Stripe" y abre el enlace adecuado.
 
