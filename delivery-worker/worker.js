@@ -1,7 +1,7 @@
 const enc=new TextEncoder();
-const PRODUCTS={ebook1:{title:"Tu Nueva Versión",pdf:"ebooks/ebook-1.pdf",html:"ebooks/ebook-1.html"},ebook2:{title:"Pre-Daily OS",pdf:"ebooks/ebook-2.pdf",html:"ebooks/ebook-2.html"},ebook3:{title:"Ayuno OS",pdf:"ebooks/ebook-3.pdf",html:"ebooks/ebook-3.html"}};
-const PACK=["ebook1","ebook2","ebook3"];
-const LINKS={ebook1:"plink_1UOgH9PdiAyvfYF71bWghV11",ebook2:"plink_1UOgIdPdiAyvfYF76vWvCHci",ebook3:"plink_1UOgJbPdiAyvfYF7Z5A1PBpq",pack:"plink_1UOgLIPdiAyvfYF77WRmmODa"};
+const PRODUCTS={ebook1:{title:"Tu Nueva Versión",pdf:"ebooks/ebook-1.pdf",html:"ebooks/ebook-1.html"},ebook2:{title:"Pre-Daily OS",pdf:"ebooks/ebook-2.pdf",html:"ebooks/ebook-2.html"},ebook3:{title:"Ayuno OS",pdf:"ebooks/ebook-3.pdf",html:"ebooks/ebook-3.html"},plus:{title:"StudyOS+"}};
+const PACK=["ebook1","ebook2","ebook3","plus"];
+const LINKS={ebook1:"plink_1UOgH9PdiAyvfYF71bWghV11",ebook2:"plink_1UOgIdPdiAyvfYF76vWvCHci",ebook3:"plink_1UOgJbPdiAyvfYF7Z5A1PBpq",plus:"plink_1UHO2GPdiAyvfYF75a6gXb0U",pack:"plink_1UOgLIPdiAyvfYF77WRmmODa"};
 const H={"cache-control":"no-store, private","x-content-type-options":"nosniff","referrer-policy":"no-referrer","x-robots-tag":"noindex, nofollow","cross-origin-resource-policy":"same-origin","content-security-policy":"default-src 'none'; style-src 'unsafe-inline'; script-src 'unsafe-inline'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'"};
 const html=(title,body,status=200)=>new Response('<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>'+title+' · StudyOS</title><style>body{font:16px system-ui;max-width:760px;margin:8vh auto;padding:20px;background:#f6f5ef;color:#263d2d}section{background:white;padding:28px;border-radius:20px}a{display:inline-block;background:#31583e;color:white;padding:12px 18px;border-radius:30px;text-decoration:none;margin:6px 4px 0 0}</style><section><p><b>studyos.</b> · Biblioteca privada</p><h1>'+title+'</h1>'+body+'</section>',{status,headers:{...H,"content-type":"text/html;charset=utf-8"}});
 const json=(x,s=200)=>new Response(JSON.stringify(x),{status:s,headers:{...H,"content-type":"application/json"}});
@@ -14,7 +14,7 @@ async function session(r,e){
   if(!s.purchaseId||await e.ACCESS.get("revoked:"+s.purchaseId))return null;
   return s;
 }
-function offer(link,e){const m={};m[e.STRIPE_LINK_EBOOK1||LINKS.ebook1]="ebook1";m[e.STRIPE_LINK_EBOOK2||LINKS.ebook2]="ebook2";m[e.STRIPE_LINK_EBOOK3||LINKS.ebook3]="ebook3";m[e.STRIPE_LINK_PACK||LINKS.pack]="pack";return m[link]||null}
+function offer(link,e){const m={};m[e.STRIPE_LINK_EBOOK1||LINKS.ebook1]="ebook1";m[e.STRIPE_LINK_EBOOK2||LINKS.ebook2]="ebook2";m[e.STRIPE_LINK_EBOOK3||LINKS.ebook3]="ebook3";m[e.STRIPE_LINK_PLUS||LINKS.plus]="plus";m[e.STRIPE_LINK_PACK||LINKS.pack]="pack";return m[link]||null}
 async function stripeGet(id,e){const u="https://api.stripe.com/v1/checkout/sessions/"+encodeURIComponent(id);const r=await fetch(u,{headers:{Authorization:"Bearer "+e.STRIPE_SECRET_KEY}});if(!r.ok)throw new Error("Stripe session lookup failed");return r.json()}
 async function stripeListByPaymentIntent(pi,e){const u="https://api.stripe.com/v1/checkout/sessions?limit=1&payment_intent="+encodeURIComponent(pi);const r=await fetch(u,{headers:{Authorization:"Bearer "+e.STRIPE_SECRET_KEY}});if(!r.ok)throw new Error("Stripe session list failed");const j=await r.json();return j.data?.[0]||null}
 async function stripeChargeGet(id,e){const u="https://api.stripe.com/v1/charges/"+encodeURIComponent(id);const r=await fetch(u,{headers:{Authorization:"Bearer "+e.STRIPE_SECRET_KEY}});if(!r.ok)throw new Error("Stripe charge lookup failed");return r.json()}
@@ -31,7 +31,7 @@ async function grantPurchase(s,e){
   return s.products
 }
 async function makeAccess(products,purchaseId,e){const t=token();await e.ACCESS.put("session:"+await sha(t),JSON.stringify({products,purchaseId}),{expirationTtl:1209600});return t}
-function buttons(products){return products.map(id=>'<p><b>'+PRODUCTS[id].title+'</b><br><a href="/download/'+id+'">Descarregar PDF</a><a href="/read/'+id+'">Llegir en línia</a></p>').join("")}
+function buttons(products){return products.map(id=>id==="plus"?'<p><b>'+PRODUCTS[id].title+'</b><br><a href="/plus">Obrir StudyOS+</a></p>':'<p><b>'+PRODUCTS[id].title+'</b><br><a href="/download/'+id+'">Descarregar PDF</a><a href="/read/'+id+'">Llegir en línia</a></p>').join("")}
 async function verifySignature(raw,sig,secret){if(!sig||!secret)return false;const t=sig.match(/(?:^|,)t=(\d+)/)?.[1],vs=[...sig.matchAll(/(?:^|,)v1=([a-f0-9]+)/g)].map(x=>x[1]);if(!t||!vs.length||Math.abs(Date.now()/1000-Number(t))>300)return false;const k=await crypto.subtle.importKey("raw",enc.encode(secret),{name:"HMAC",hash:"SHA-256"},false,["sign"]);const d=await crypto.subtle.sign("HMAC",k,enc.encode(t+"."+raw));const h=[...new Uint8Array(d)].map(x=>x.toString(16).padStart(2,"0")).join("");return vs.some(x=>x.length===h.length&&x===h)}
 async function thanks(r,e,u){
   if(e.PAYMENTS_ENABLED!=="true")return html("Pagaments desactivats","<p>Aquest flux encara està en proves.</p>",503);
@@ -88,6 +88,7 @@ if(p==="/thank-you"&&r.method==="GET")return thankYou(r,e);
 if(p==="/library"&&r.method==="GET")return library(r,e);
 if(p==="/stripe-webhook"&&r.method==="POST")return webhook(r,e);
 if(p==="/logout")return new Response(null,{status:302,headers:{...H,Location:"/thank-you","Set-Cookie":"studyos_access=; HttpOnly; Secure; SameSite=Lax; Path=/; Max-Age=0"}});
+if(p==="/plus"&&r.method==="GET"){const s=await session(r,e);if(!s)return html("Accés no disponible","<p>Necessites una compra confirmada.</p>",401);if(!s.products.includes("plus"))return html("Accés no inclòs","<p>StudyOS+ no forma part de la teva compra.</p>",403);return html("StudyOS+","<p>Accés concedit. El contingut privat de StudyOS+ es connectarà aquí abans de l’activació comercial.</p>")}
 const m=p.match(/^\/(download|read)\/(ebook1|ebook2|ebook3)$/);if(m&&r.method==="GET")return documentRoute(r,e,m[2],m[1]==="download"?"pdf":"html");
 return html("No trobat","<p>Aquesta pàgina no existeix.</p>",404);
 }catch(x){console.error(x);return html("Error temporal","<p>Hi ha hagut un error temporal.</p>",500)}}};
