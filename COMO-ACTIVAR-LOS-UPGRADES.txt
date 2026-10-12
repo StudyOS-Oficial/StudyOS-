@@ -6,10 +6,16 @@ STUDYOS V5 — UPGRADES Y ACCESO PREMIUM (PENDIENTE DE ACTIVACIÓN)
 - Al tocar un capítulo cerrado, el lector llega a la invitación de continuar.
 - La muestra gratuita está físicamente separada de los PDF completos. No hay ninguna contraseña de JavaScript ni HTML oculto que permita descargarlos.
 
+PRECIOS ACTUALES
+- eBook individual: 2,99 € por cada uno de los tres.
+- StudyOS+: 3,99 €.
+- StudyOS Complete: 9,99 €.
+- Comprar los cuatro elementos por separado: 12,96 €; Complete ahorra 2,97 €.
+
 ¿QUÉ SE OFRECE DESPUÉS?
-- eBook individual: 5,99 € por cada uno de los tres.
-- StudyOS+ por separado: precio propuesto 7,99 €.
-- StudyOS Complete: 14,99 € (los tres eBooks + StudyOS+).
+- eBook individual: 2,99 € por cada uno de los tres.
+- StudyOS+ por separado: 3,99 €.
+- StudyOS Complete: 9,99 € (los tres eBooks + StudyOS+).
 - Hay que concretar la duración y alcance del acceso a StudyOS+ ANTES de cobrar.
 
 STRIPE (todavía sin activar)
